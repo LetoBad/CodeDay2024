@@ -24,7 +24,7 @@ public class ConDB {
     }
 
     public Aluno returnAluno(int idAluno) throws SQLException {
-        try (Connection con = DriverManager.getConnection(url, "root", "123abc");) {
+        try (Connection con = DriverManager.getConnection(url, "root", "leto");) {
 
             Aluno aluno = null;
 
@@ -39,7 +39,7 @@ public class ConDB {
     }
 
     public Funcionario returnFuncionario(int idFunc) throws SQLException {
-        try (Connection con = DriverManager.getConnection(url, "root", "123abc");) {
+        try (Connection con = DriverManager.getConnection(url, "root", "leto");) {
 
             Funcionario funcionario = null;
 
@@ -56,7 +56,7 @@ public class ConDB {
     // Esvazia o arrayAluno e Preenche ele com todos os alunos
     public void returnTodosAlunos() throws SQLException {
         arrayAluno.clear();
-        try (Connection con = DriverManager.getConnection(url, "root", "123abc");) {
+        try (Connection con = DriverManager.getConnection(url, "root", "leto");) {
 
             Aluno aluno;
 
@@ -73,7 +73,7 @@ public class ConDB {
     // Esvazia o arrayAluno e Preenche com todos os alunos de uma determinada turma
     public void returnAlunosPorTurma(String nome_turma) throws SQLException {
         arrayAluno.clear();
-        try (Connection con = DriverManager.getConnection(url, "root", "123abc");) {
+        try (Connection con = DriverManager.getConnection(url, "root", "leto");) {
 
             int idTurma = -1;
 
@@ -98,7 +98,7 @@ public class ConDB {
     // Esvazia o arrayAluno e Preenche ele com todos os alunos
     public void returnTodasTurmas() throws SQLException {
         arrayAluno.clear();
-        try (Connection con = DriverManager.getConnection(url, "root", "123abc");) {
+        try (Connection con = DriverManager.getConnection(url, "root", "leto");) {
 
             Turma turma;
 
@@ -113,7 +113,7 @@ public class ConDB {
 
     public void returnProfessoresPorTurma(String nome_turma) throws SQLException {
         arrayAluno.clear();
-        try (Connection con = DriverManager.getConnection(url, "root", "123abc");) {
+        try (Connection con = DriverManager.getConnection(url, "root", "leto");) {
 
             int idTurma = -1;
 
@@ -140,7 +140,7 @@ public class ConDB {
 
     public void returnTodosFuncionarios() throws SQLException {
         arrayAluno.clear();
-        try (Connection con = DriverManager.getConnection(url, "root", "123abc");) {
+        try (Connection con = DriverManager.getConnection(url, "root", "leto");) {
 
             Funcionario funcionario;
 
@@ -156,7 +156,7 @@ public class ConDB {
 
     public void returnTodosAtrasosAluno(String nomeAluno) throws SQLException {
         arrayAluno.clear();
-        try (Connection con = DriverManager.getConnection(url, "root", "123abc");) {
+        try (Connection con = DriverManager.getConnection(url, "root", "leto");) {
 
             Atraso atraso;
 
@@ -185,7 +185,7 @@ public class ConDB {
     // Leto
     public void registrarAtraso(String nomeAluno, String nomeTurma, String nomeProfessor, String data, String hora,
             String razao) throws SQLException {
-        try (Connection con = DriverManager.getConnection(url, "root", "123abc")) {
+        try (Connection con = DriverManager.getConnection(url, "root", "leto")) {
 
             // aqui es para obtener el ID del alumno
             int idAluno = getIdAlunoPorNome(nomeAluno);
@@ -225,7 +225,7 @@ public class ConDB {
     // aca son metodos auxiliares para obtener IDs
     private int getIdAlunoPorNome(String nomeAluno) throws SQLException {
         String sql = "SELECT id_aluno FROM aluno WHERE nome_aluno = ?";
-        try (Connection con = DriverManager.getConnection(url, "root", "123abc");
+        try (Connection con = DriverManager.getConnection(url, "root", "leto");
                 PreparedStatement query = con.prepareStatement(sql)) {
             query.setString(1, nomeAluno);
             ResultSet rSet = query.executeQuery();
@@ -238,7 +238,7 @@ public class ConDB {
 
     private int getIdTurmaPorNome(String nomeTurma) throws SQLException {
         String sql = "SELECT id_turma FROM turma WHERE nome_turma = ?";
-        try (Connection con = DriverManager.getConnection(url, "root", "123abc");
+        try (Connection con = DriverManager.getConnection(url, "root", "leto");
                 PreparedStatement query = con.prepareStatement(sql)) {
             query.setString(1, nomeTurma);
             ResultSet rSet = query.executeQuery();
@@ -251,7 +251,7 @@ public class ConDB {
 
     private int getIdProfessorPorNome(String nomeProfessor) throws SQLException {
         String sql = "SELECT id_func FROM funcionario WHERE nome_func = ? AND id_tipofunc = 1"; // Asegura que sea un profesor
-        try (Connection con = DriverManager.getConnection(url, "root", "123abc");
+        try (Connection con = DriverManager.getConnection(url, "root", "leto");
                 PreparedStatement query = con.prepareStatement(sql)) {
             query.setString(1, nomeProfessor);
             ResultSet rSet = query.executeQuery();
@@ -274,7 +274,7 @@ public class ConDB {
                 "FROM atraso " +
                 "JOIN funcionario ON atraso.id_func = funcionario.id_func " +
                 "WHERE atraso.id_aluno = ?";
-        try (Connection con = DriverManager.getConnection(url, "root", "123abc");
+        try (Connection con = DriverManager.getConnection(url, "root", "leto");
                 PreparedStatement query = con.prepareStatement(sql)) {
             query.setInt(1, idAluno);
             ResultSet rSet = query.executeQuery();
@@ -301,7 +301,7 @@ public class ConDB {
     public void editarAtraso(int idAtraso, String novaData, String novaHora, String novaJustificativa)
             throws SQLException {
         String sql = "UPDATE atraso SET data_atraso = ?, hora_atraso = ?, justificativa = ? WHERE id_atraso = ?";
-        try (Connection con = DriverManager.getConnection(url, "root", "123abc");
+        try (Connection con = DriverManager.getConnection(url, "root", "leto");
                 PreparedStatement query = con.prepareStatement(sql)) {
             query.setString(1, novaData);
             query.setString(2, novaHora);
