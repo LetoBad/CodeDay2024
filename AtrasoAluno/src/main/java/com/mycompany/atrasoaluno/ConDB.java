@@ -312,6 +312,7 @@ public class ConDB {
                 System.out.println("Atraso atualizado com sucesso!");
             } else {
                 System.out.println("Erro ao atualizar o atraso. Verifique o ID.");
+                
             }
         }
     }
